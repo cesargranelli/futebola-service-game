@@ -1,0 +1,35 @@
+server:
+  port: 6001
+  servlet:
+    application-display-name: futebola-service-game
+    context-path: /futebola/game
+
+spring:
+  application:
+    name: futebola-service-game
+  jackson:
+    time-zone: America/Sao_Paulo
+
+logging:
+  level:
+    org:
+      springframework:
+        web: info
+---
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://cesargranelli:IiXNtqwmg5sWTlEv@cluster0.ii5lov8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: futebola
+  cloud:
+    gcp:
+      firestore:
+        project-id: sevenine-futebola
+      credentials:
+        location: file:src/main/resources/google-credentials.json
+
+game:
+  params:
+    api-provider: FOOTBALL_DATA_TEAM
+    scheduled:
+      fixed-rate: 360000
