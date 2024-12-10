@@ -1,5 +1,6 @@
 package com.futebola.service.game.infrastructure.repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.futebola.service.game.application.service.GetListPlayerData;
 import com.futebola.service.game.business.entity.Player;
@@ -19,9 +20,10 @@ public class PlayerDataRepository implements GetListPlayerData {
 
     @Override
     public List<Player> getPlayers() {
-        List<PlayerDocument> mono = repository.findAll().collectList().block();
+        List<PlayerDocument> playerDocumentList = repository.findAll().collectList().block();
 
-        return null;
+        return mapper.convertValue(playerDocumentList, new TypeReference<>() {
+        });
     }
 
 }
